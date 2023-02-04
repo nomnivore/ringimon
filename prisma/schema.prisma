@@ -37,13 +37,17 @@ model Emotion {
   phy Int @default(0)
   mag Int @default(0)
   ran Int @default(0)
+
+  creatures Creature[]
 }
 
 // I'm not sure these should even be database tables
 model Type {
-  id      Int
-  groupId Int
-  name    String @unique
+  id       Int
+  groupId  Int
+  name     String     @unique
+
+  creatures Creature[]
 
   @@id([id, groupId])
 }
@@ -52,6 +56,8 @@ model Rarity {
   id        Int     @id @default(autoincrement())
   name      String
   threshold Decimal
+
+  creatures Creature[]
 }
 
 // =================================================
@@ -67,7 +73,15 @@ model Creature {
   midId Int
   botId Int
 
-  essenceId Int
+  essenceId   Int
+  typeGroupId Int
+  typeId      Int
+  emotionId   Int
+  rarityId    Int
+
+  type Type @relation(fields: [typeGroupId, typeId], references: [id, groupId])
+  emotion Emotion @relation(fields: [emotionId], references: [id])
+  rarity Rarity @relation(fields: [rarityId], references: [id])
 
   user    User         @relation(fields: [userId], references: [id])
   top     BaseCreature @relation(name: "TopCreature", fields: [topId], references: [id])
