@@ -59,7 +59,7 @@ const Home: NextPageWithLayout = () => {
   );
 };
 
-Home.getLayout = (page: ReactElement) => {
+Home.getLayout = (page) => {
     return (
       <Layout>
         {page}
