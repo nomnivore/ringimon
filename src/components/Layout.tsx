@@ -17,7 +17,7 @@ export default function Layout({ children }: Props) {
         <meta name="description" content="Featuring over 48 billion unique creatures" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div id="app" className="min-h-screen flex flex-col">
+      <div id="app" className="min-h-screen grid grid-rows-[auto_1fr_auto]">
         <header className="flex-shink-0 w-screen flex justify-between bg-slate-100 shadow-md px-4">
           <Link href="/" className="px-2 py-2 text-lg font-semibold tracking-tighter hover:bg-slate-300 rounded-sm">RiNGimon</Link>
           <nav className="flex items-center justify-center">Generate | Inventory</nav>
@@ -47,9 +47,9 @@ export default function Layout({ children }: Props) {
           </nav>
         </header>
         
-        <main className="flex-grow">{children}</main>
+        <main className="">{children}</main>
 
-        <footer className="flex-shrink-0 px-4 py-1 bg-slate-200 flex justify-center">
+        <footer className="px-4 py-1 bg-slate-200 flex justify-center">
           <small>featuring 48709447200 unique combinations</small>
         </footer>
       </div>
