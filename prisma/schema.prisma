@@ -79,14 +79,14 @@ model Creature {
   emotionId   Int
   rarityId    Int
 
-  type Type @relation(fields: [typeGroupId, typeId], references: [id, groupId])
-  emotion Emotion @relation(fields: [emotionId], references: [id])
-  rarity Rarity @relation(fields: [rarityId], references: [id])
+  type Type @relation(fields: [typeGroupId, typeId], references: [id, groupId], onDelete: Cascade)
+  emotion Emotion @relation(fields: [emotionId], references: [id], onDelete: Cascade)
+  rarity Rarity @relation(fields: [rarityId], references: [id], onDelete: Cascade)
 
-  user    User?         @relation(fields: [userId], references: [id])
-  top     BaseCreature @relation(name: "TopCreature", fields: [topId], references: [id])
-  mid     BaseCreature @relation(name: "MidCreature", fields: [midId], references: [id])
-  bot     BaseCreature @relation(name: "BotCreature", fields: [botId], references: [id])
+  user    User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  top     BaseCreature @relation(name: "TopCreature", fields: [topId], references: [id], onDelete: Cascade)
+  mid     BaseCreature @relation(name: "MidCreature", fields: [midId], references: [id], onDelete: Cascade)
+  bot     BaseCreature @relation(name: "BotCreature", fields: [botId], references: [id], onDelete: Cascade)
 //  essence BaseCreature @relation(name: "EssenceCreature", fields: [essenceId], references: [id])
 }
 

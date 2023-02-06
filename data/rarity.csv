@@ -1,0 +1,5 @@
+name,threshold
+Common,0.5
+Rare,0.8
+Legendary,0.9
+Mythic,1

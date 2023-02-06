@@ -31,6 +31,7 @@ export async function createCreature(userId: string | null) {
 }
 
 export async function getCreatureById(creatureId: string) {
+  // TODO: include part image urls somewhere in this model
   return await prisma.creature.findUnique({
     where: {
       id: creatureId,

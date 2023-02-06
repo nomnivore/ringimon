@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-
+import Image from "next/image";
 import { api } from "../utils/api";
 
 const Generate: NextPageWithLayout = () => {
@@ -20,15 +20,36 @@ const Generate: NextPageWithLayout = () => {
           `[${creature.data.type.name}] ${creature.data.emotion.name} ${creature.data.top.topName}${creature.data.mid.midName}${creature.data.bot.botName}`) ||
           "[Type] Emotion CreatureName"}
       </div>
-      <div className="grid h-[500px] w-[350px] grid-rows-3 divide-y-2 divide-zinc-700 rounded-sm border-4 border-blue-600">
-        <div className="flex items-center justify-center">
-          {(creature.data && creature.data.top.name) || "top"}
+      <div className="grid h-[500px] w-[350px] grid-rows-3 divide-y-0 divide-zinc-700 rounded-sm border-0 border-blue-600">
+        <div className="relative flex items-center justify-center">
+          {creature.data && (
+            <Image
+              src={`/cimg/${creature.data.top.name.toLowerCase()}/top.png`}
+              alt={creature.data.top.name}
+              fill
+              sizes="100%"
+            />
+          )}
         </div>
-        <div className="flex items-center justify-center">
-          {(creature.data && creature.data.mid.name) || "mid"}
+        <div className="relative flex items-center justify-center">
+          {creature.data && (
+            <Image
+              src={`/cimg/${creature.data.mid.name.toLowerCase()}/mid.png`}
+              alt={creature.data.mid.name}
+              fill
+              sizes="100%"
+            />
+          )}
         </div>
-        <div className="flex items-center justify-center">
-          {(creature.data && creature.data.bot.name) || "bot"}
+        <div className="relative flex items-center justify-center">
+          {creature.data && (
+            <Image
+              src={`/cimg/${creature.data.bot.name.toLowerCase()}/bot.png`}
+              alt={creature.data.bot.name}
+              fill
+              sizes="100%"
+            />
+          )}
         </div>
       </div>
 

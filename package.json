@@ -7,7 +7,8 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "processimg": "ts-node --transpile-only ./data/processImages.ts"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
@@ -17,10 +18,12 @@
     "@trpc/next": "^10.9.0",
     "@trpc/react-query": "^10.9.0",
     "@trpc/server": "^10.9.0",
+    "csv": "^6.2.6",
     "next": "13.1.6",
     "next-auth": "^4.19.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.31.3",
     "superjson": "1.9.1",
     "zod": "^3.20.2"
   },
@@ -29,6 +32,7 @@
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
+    "@types/sharp": "^0.31.1",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "autoprefixer": "^10.4.7",
@@ -39,9 +43,13 @@
     "prettier-plugin-tailwindcss": "^0.2.1",
     "prisma": "^4.9.0",
     "tailwindcss": "^3.2.0",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   },
   "ct3aMetadata": {
     "initVersion": "7.4.1"
+  },
+  "prisma": {
+    "seed": "ts-node --transpile-only ./prisma/seed.ts"
   }
 }

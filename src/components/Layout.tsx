@@ -10,18 +10,21 @@ export default function Layout({ children }: Props) {
     <>
       <Head>
         <title>RiNGimon</title>
-        <meta name="description" content="Featuring over 48 billion unique creatures" />
+        <meta
+          name="description"
+          content="Featuring over 48 billion unique creatures"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div id="app" className="min-h-screen grid grid-rows-[auto_1fr_auto]">
+      <div id="app" className="grid min-h-screen grid-rows-[auto_1fr_auto]">
         <HeaderNav />
-        
+
         <main className="">{children}</main>
 
-        <footer className="px-4 py-1 bg-slate-200 flex justify-center">
+        <footer className="flex justify-center bg-slate-200 px-4 py-1">
           <small>featuring 48709447200 unique combinations</small>
         </footer>
       </div>
     </>
-  )
+  );
 }
