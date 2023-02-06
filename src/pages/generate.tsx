@@ -1,46 +1,9 @@
-import type { Creature } from "@prisma/client";
-import { useState } from "react";
-import { string } from "zod";
 import Layout from "../components/Layout";
 
 import { api } from "../utils/api";
 
 const Generate: NextPageWithLayout = () => {
-  const [data, setData] = useState<
-    | (Creature & {
-        emotion: {
-          name: string;
-        };
-        type: {
-          name: string;
-        };
-        rarity: {
-          name: string;
-        };
-        top: {
-          topName: string;
-          name: string;
-        };
-        mid: {
-          midName: string;
-          name: string;
-        };
-        bot: {
-          botName: string;
-          name: string;
-        };
-        essence: {
-          name: string;
-        };
-      })
-    | null
-  >(null);
-  // ugliest code ever, just to get things working initially
-  const creature = api.generator.new.useMutation({
-    onSuccess: (data) => {
-      setData(data || null);
-    },
-  });
+  const creature = api.generator.new.useMutation();
 
   async function runGenerate() {
     await creature.mutateAsync();
@@ -53,19 +16,19 @@ const Generate: NextPageWithLayout = () => {
         Generate
       </h1>
       <div className="text-2xl">
-        {(data &&
-          `${data.type.name} ${data.emotion.name} ${data.top.topName}${data.mid.midName}${data.bot.botName} of ${data.essence.name}`) ||
-          " Big Monster Name of Craziness"}
+        {(creature.data &&
+          `[${creature.data.type.name}] ${creature.data.emotion.name} ${creature.data.top.topName}${creature.data.mid.midName}${creature.data.bot.botName}`) ||
+          "[Type] Emotion CreatureName"}
       </div>
       <div className="grid h-[500px] w-[350px] grid-rows-3 divide-y-2 divide-zinc-700 rounded-sm border-4 border-blue-600">
         <div className="flex items-center justify-center">
-          {(data && data.top.name) || "top"}
+          {(creature.data && creature.data.top.name) || "top"}
         </div>
         <div className="flex items-center justify-center">
-          {(data && data.mid.name) || "mid"}
+          {(creature.data && creature.data.mid.name) || "mid"}
         </div>
         <div className="flex items-center justify-center">
-          {(data && data.bot.name) || "bot"}
+          {(creature.data && creature.data.bot.name) || "bot"}
         </div>
       </div>
 

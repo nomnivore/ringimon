@@ -24,7 +24,7 @@ model BaseCreature {
   topCreatures     Creature[] @relation("TopCreature")
   midCreatures     Creature[] @relation("MidCreature")
   botCreatures     Creature[] @relation("BotCreature")
-  essenceCreatures Creature[] @relation("EssenceCreature")
+  // essenceCreatures Creature[] @relation("EssenceCreature")
 }
 
 model Emotion {
@@ -67,13 +67,13 @@ model Creature {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String
+  userId String?
 
   topId Int
   midId Int
   botId Int
 
-  essenceId   Int
+//  essenceId   Int
   typeGroupId Int
   typeId      Int
   emotionId   Int
@@ -83,11 +83,11 @@ model Creature {
   emotion Emotion @relation(fields: [emotionId], references: [id])
   rarity Rarity @relation(fields: [rarityId], references: [id])
 
-  user    User         @relation(fields: [userId], references: [id])
+  user    User?         @relation(fields: [userId], references: [id])
   top     BaseCreature @relation(name: "TopCreature", fields: [topId], references: [id])
   mid     BaseCreature @relation(name: "MidCreature", fields: [midId], references: [id])
   bot     BaseCreature @relation(name: "BotCreature", fields: [botId], references: [id])
-  essence BaseCreature @relation(name: "EssenceCreature", fields: [essenceId], references: [id])
+//  essence BaseCreature @relation(name: "EssenceCreature", fields: [essenceId], references: [id])
 }
 
 model Example {
