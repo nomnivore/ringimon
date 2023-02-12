@@ -40,3 +40,8 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+
+# creature images - local folder until i find a better solution
+/data/artsFull/
+/public/cimg/
