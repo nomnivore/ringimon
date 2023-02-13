@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import { api } from "../utils/api";
 import TypeBadge from "../components/TypeBadge";
+import CreatureImage from "../components/CreatureImage";
 
 const Generate: NextPageWithLayout = () => {
   const creature = api.generator.new.useMutation();
@@ -20,37 +21,8 @@ const Generate: NextPageWithLayout = () => {
         <TypeBadge type={creature.data?.type.name} />
         <span className="text-2xl">{creature.data?.fullName || "???????"}</span>
       </div>
-      <div className="grid h-[500px] w-[350px] grid-rows-3 divide-y-0 divide-zinc-700 rounded-sm border-0 border-blue-600">
-        <div className="relative flex items-center justify-center">
-          {creature.data && (
-            <Image
-              src={`/cimg/${creature.data.top.name.toLowerCase()}/top.png`}
-              alt={creature.data.top.name}
-              fill
-              sizes="100%"
-            />
-          )}
-        </div>
-        <div className="relative flex items-center justify-center">
-          {creature.data && (
-            <Image
-              src={`/cimg/${creature.data.mid.name.toLowerCase()}/mid.png`}
-              alt={creature.data.mid.name}
-              fill
-              sizes="100%"
-            />
-          )}
-        </div>
-        <div className="relative flex items-center justify-center">
-          {creature.data && (
-            <Image
-              src={`/cimg/${creature.data.bot.name.toLowerCase()}/bot.png`}
-              alt={creature.data.bot.name}
-              fill
-              sizes="100%"
-            />
-          )}
-        </div>
+      <div className="h-[500px] w-[350px]">
+        {creature.data && <CreatureImage data={creature.data} />}
       </div>
       <table className="table-auto text-center">
         <tr>
