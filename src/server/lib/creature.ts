@@ -1,6 +1,27 @@
 import { prisma } from "../db";
+import type { Creature } from "@prisma/client";
 
 import { randBetween } from "../../utils/random";
+
+type NameParts = {
+  top: { topName: string };
+  mid: { midName: string };
+  bot: { botName: string };
+};
+
+type WithFullName<T> = T & {
+  fullName: string;
+};
+
+function computeCreatureName<Creature extends NameParts>(
+  creature: Creature
+): WithFullName<Creature> | null {
+  if (creature == null) return null;
+  return {
+    ...creature,
+    fullName: `${creature.top.topName}${creature.mid.midName}${creature.bot.botName}`,
+  };
+}
 
 export async function genRandomCreatureProps() {
   const numCreatures = await prisma.baseCreature.count();
@@ -32,7 +53,7 @@ export async function createCreature(userId: string | null) {
 
 export async function getCreatureById(creatureId: string) {
   // TODO: include part image urls somewhere in this model
-  return await prisma.creature.findUnique({
+  const creature = await prisma.creature.findUnique({
     where: {
       id: creatureId,
     },
@@ -41,8 +62,10 @@ export async function getCreatureById(creatureId: string) {
       mid: { select: { midName: true, name: true } },
       bot: { select: { botName: true, name: true } },
       type: { select: { name: true } },
-      emotion: { select: { name: true } },
+      emotion: true,
       rarity: { select: { name: true } },
     },
   });
+
+  return creature ? computeCreatureName(creature) : null;
 }
