@@ -15,8 +15,7 @@ type WithFullName<T> = T & {
 
 function computeCreatureName<Creature extends NameParts>(
   creature: Creature
-): WithFullName<Creature> | null {
-  if (creature == null) return null;
+): WithFullName<Creature> {
   return {
     ...creature,
     fullName: `${creature.top.topName}${creature.mid.midName}${creature.bot.botName}`,
@@ -51,21 +50,34 @@ export async function createCreature(userId: string | null) {
   });
 }
 
+const creatureIncludes = {
+  top: { select: { topName: true, name: true } },
+  mid: { select: { midName: true, name: true } },
+  bot: { select: { botName: true, name: true } },
+  type: { select: { name: true } },
+  emotion: true,
+  rarity: { select: { name: true } },
+};
+
 export async function getCreatureById(creatureId: string) {
   // TODO: include part image urls somewhere in this model
   const creature = await prisma.creature.findUnique({
     where: {
       id: creatureId,
     },
-    include: {
-      top: { select: { topName: true, name: true } },
-      mid: { select: { midName: true, name: true } },
-      bot: { select: { botName: true, name: true } },
-      type: { select: { name: true } },
-      emotion: true,
-      rarity: { select: { name: true } },
-    },
+    include: creatureIncludes,
   });
 
   return creature ? computeCreatureName(creature) : null;
+}
+
+export async function getCreaturesByUserId(userId: string) {
+  const creatures = await prisma.creature.findMany({
+    where: {
+      userId: userId,
+    },
+    include: creatureIncludes,
+  });
+
+  return creatures.map(computeCreatureName);
 }

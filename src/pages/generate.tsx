@@ -1,11 +1,10 @@
 import Layout from "../components/Layout";
-import Image from "next/image";
 import { api } from "../utils/api";
 import TypeBadge from "../components/TypeBadge";
 import CreatureImage from "../components/CreatureImage";
 
 const Generate: NextPageWithLayout = () => {
-  const creature = api.generator.new.useMutation();
+  const creature = api.creatures.new.useMutation();
 
   async function runGenerate() {
     await creature.mutateAsync();

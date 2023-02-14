@@ -16,10 +16,13 @@ export default function Layout({ children }: Props) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div id="app" className="grid min-h-screen grid-rows-[auto_1fr_auto]">
+      <div
+        id="app"
+        className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-slate-100"
+      >
         <HeaderNav />
 
-        <main className="">{children}</main>
+        <main className="container mx-auto max-w-7xl px-2">{children}</main>
 
         <footer className="flex justify-center bg-slate-200 px-4 py-1">
           <small>featuring 48709447200 unique combinations</small>
