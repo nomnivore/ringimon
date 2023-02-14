@@ -24,10 +24,22 @@ const Inventory: NextPageWithLayout = () => {
         <h2 className="my-3 text-2xl font-semibold tracking-tighter">
           Creatures
         </h2>
-        <div
-          id="box"
-          className="mx-auto flex flex-wrap justify-center gap-2 md:gap-4 lg:gap-6"
-        >
+        <div className="mx-auto grid max-w-4xl grid-cols-2 font-bold md:grid-cols-4">
+          <div className="text-center text-lg">
+            Common: {creatures.data?.filter((c) => c.rarityId == 1).length}
+          </div>
+          <div className="text-center text-lg text-blue-800">
+            Rare: {creatures.data?.filter((c) => c.rarityId == 2).length}
+          </div>
+          <div className="text-center text-lg text-yellow-800">
+            Legendary: {creatures.data?.filter((c) => c.rarityId == 3).length}
+          </div>
+          <div className="text-center text-lg text-purple-800">
+            Mythic: {creatures.data?.filter((c) => c.rarityId == 4).length}
+          </div>
+        </div>
+        <div className="my-4"></div>
+        <div className="mx-auto flex flex-wrap justify-center gap-2 md:gap-4 lg:gap-6">
           {creatures.data?.map((c) => (
             <div
               key={c.id}
