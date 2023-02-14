@@ -20,7 +20,7 @@ const Generate: NextPageWithLayout = () => {
         <TypeBadge type={creature.data?.type.name} />
         <span className="text-2xl">{creature.data?.fullName || "???????"}</span>
       </div>
-      <div className="h-[500px] w-[350px]">
+      <div className="h-[525px] w-[350px]">
         {creature.data && <CreatureImage data={creature.data} />}
       </div>
       <table className="table-auto text-center">

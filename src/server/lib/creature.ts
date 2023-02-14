@@ -77,6 +77,7 @@ export async function getCreaturesByUserId(userId: string) {
       userId: userId,
     },
     include: creatureIncludes,
+    orderBy: { createdAt: "desc" },
   });
 
   return creatures.map(computeCreatureName);

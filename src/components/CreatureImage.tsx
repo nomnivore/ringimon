@@ -11,7 +11,7 @@ type Props = {
 const CreatureImage = ({ data }: Props) => {
   return (
     <>
-      <div className="flex h-1/3 w-full items-center justify-center">
+      <div className="flex w-full items-center justify-center">
         {data && (
           <Image
             src={`/cimg/${data.top.name.toLowerCase()}/top.png`}
@@ -21,7 +21,7 @@ const CreatureImage = ({ data }: Props) => {
           />
         )}
       </div>
-      <div className="flex h-1/3 w-full items-center justify-center">
+      <div className="flex w-full items-center justify-center">
         {data && (
           <Image
             src={`/cimg/${data.mid.name.toLowerCase()}/mid.png`}
@@ -31,7 +31,7 @@ const CreatureImage = ({ data }: Props) => {
           />
         )}
       </div>
-      <div className="flex h-1/3 w-full items-center justify-center">
+      <div className="flex w-full items-center justify-center">
         {data && (
           <Image
             src={`/cimg/${data.bot.name.toLowerCase()}/bot.png`}

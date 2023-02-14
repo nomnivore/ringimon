@@ -1,3 +1,4 @@
+import CreatureCard from "../components/CreatureCard";
 import CreatureImage from "../components/CreatureImage";
 import Layout from "../components/Layout";
 import TypeBadge from "../components/TypeBadge";
@@ -25,7 +26,7 @@ const Inventory: NextPageWithLayout = () => {
           Creatures
         </h2>
         <div className="mx-auto grid max-w-4xl grid-cols-2 font-bold md:grid-cols-4">
-          <div className="text-center text-lg">
+          <div className="text-center text-lg text-gray-700">
             Common: {creatures.data?.filter((c) => c.rarityId == 1).length}
           </div>
           <div className="text-center text-lg text-blue-800">
@@ -41,23 +42,7 @@ const Inventory: NextPageWithLayout = () => {
         <div className="my-4"></div>
         <div className="mx-auto flex flex-wrap justify-center gap-2 md:gap-4 lg:gap-6">
           {creatures.data?.map((c) => (
-            <div
-              key={c.id}
-              className="flex w-48 flex-col items-center gap-2 rounded-lg border-2 border-yellow-400 bg-yellow-100 p-3 transition-all duration-200 hover:bg-white hover:shadow-lg"
-            >
-              <div className="grid w-full grid-cols-2">
-                <div>
-                  <TypeBadge type={c.type.name} />
-                </div>
-                <div className="text-center">{c.emotion.name}</div>
-              </div>
-              <div className="h-[200px] w-[140px]">
-                <CreatureImage data={c} />
-              </div>
-              <div className="text-center text-lg font-semibold">
-                {c.fullName}
-              </div>
-            </div>
+            <CreatureCard key={c.id} creature={c} />
           ))}
         </div>
       </div>
