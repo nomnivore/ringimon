@@ -6,7 +6,7 @@ const HeaderNav = () => {
   const { data: sessionData } = useSession();
 
   return (
-    <header className="flex w-screen justify-between bg-slate-200 px-4 shadow-md">
+    <header className="fixed top-0 flex w-screen justify-between bg-slate-200 px-4 shadow-md">
       <Link
         href="/"
         className="rounded-sm px-2 py-2 text-lg font-semibold tracking-tighter hover:bg-slate-300"
