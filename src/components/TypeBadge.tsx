@@ -27,7 +27,7 @@ function getStyle(type?: string): string {
 const TypeBadge = ({ type }: Props) => {
   return (
     <div
-      className={`flex items-center justify-center rounded-lg border px-3 font-mono ${getStyle(
+      className={`flex max-w-fit items-center justify-center rounded-lg border px-3 font-mono ${getStyle(
         type
       )}`}
     >
