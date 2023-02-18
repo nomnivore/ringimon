@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import { api } from "../utils/api";
-import TypeBadge from "../components/TypeBadge";
+import TypeBadge, { type TypeBadgeProps } from "../components/TypeBadge";
 import CreatureImage from "../components/CreatureImage";
 
 const Generate: NextPageWithLayout = () => {
@@ -17,7 +17,7 @@ const Generate: NextPageWithLayout = () => {
         Generate
       </h1>
       <div className="flex gap-2">
-        <TypeBadge type={creature.data?.type.name} />
+        <TypeBadge type={creature.data?.type.name as TypeBadgeProps["type"]} />
         <span className="text-2xl">{creature.data?.fullName || "???????"}</span>
       </div>
       <div className="h-[525px] w-[350px]">

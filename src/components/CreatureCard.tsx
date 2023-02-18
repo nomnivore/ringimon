@@ -1,6 +1,5 @@
-import type { Key } from "react";
 import CreatureImage from "./CreatureImage";
-import TypeBadge from "./TypeBadge";
+import TypeBadge, { type TypeBadgeProps } from "./TypeBadge";
 
 // ? can we infer the types?
 type Props = {
@@ -35,7 +34,7 @@ const CreatureCard = ({ creature }: Props) => {
     >
       <div className="grid w-full grid-cols-2">
         <div>
-          <TypeBadge type={creature.type.name} />
+          <TypeBadge type={creature.type.name as TypeBadgeProps["type"]} />
         </div>
         <div className="text-center">{creature.emotion.name}</div>
       </div>
