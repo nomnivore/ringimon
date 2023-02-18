@@ -6,7 +6,7 @@ const HeaderNav = () => {
   const { data: sessionData } = useSession();
 
   return (
-    <header className="fixed top-0 flex w-screen justify-between bg-slate-200 px-4 shadow-md">
+    <header className="fixed top-0 left-0 flex w-screen justify-between bg-slate-200 px-4 shadow-md">
       <Link
         href="/"
         className="rounded-sm px-2 py-2 text-lg font-semibold tracking-tighter hover:bg-slate-300"
@@ -40,7 +40,10 @@ const HeaderNav = () => {
             <div className="mx-3" />
             <div className="w-9 overflow-clip rounded-full border-2 border-slate-600">
               <Image
-                src={sessionData.user?.image || ""}
+                src={
+                  sessionData.user?.image ||
+                  "https://api.dicebear.com/5.x/thumbs/jpg"
+                }
                 alt="your avatar"
                 width="36"
                 height="36"

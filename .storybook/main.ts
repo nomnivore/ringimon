@@ -6,6 +6,7 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-postcss",
+    "@tomfreudenberg/next-auth-mock/storybook",
   ],
   framework: {
     name: "@storybook/nextjs",
@@ -14,5 +15,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  staticDirs: ["../public"],
 };
 export default config;

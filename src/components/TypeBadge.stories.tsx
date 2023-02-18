@@ -1,6 +1,4 @@
 import type { StoryFn } from "@storybook/react";
-import React from "react";
-
 import TypeBadge from "./TypeBadge";
 
 export default {
