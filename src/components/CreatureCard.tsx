@@ -1,3 +1,4 @@
+import { cva, type VariantProps } from "cva";
 import CreatureImage from "./CreatureImage";
 import TypeBadge, { type TypeBadgeProps } from "./TypeBadge";
 
@@ -14,23 +15,30 @@ type Props = {
   };
 };
 
-const rarityStyles = [
-  "border-gray-400 hover:bg-gray-200",
-  "border-blue-400 hover:bg-blue-100",
-  "border-yellow-400 hover:bg-yellow-100",
-  "border-purple-400 hover:bg-purple-100",
-];
-
-function getRarityStyles(rarityId: number) {
-  return rarityStyles[rarityId - 1] || "";
-}
+const rarityCardStyles = cva(
+  "flex w-48 flex-col items-center gap-2 rounded-lg border-2 p-3 transition-all duration-200 hover:shadow-lg",
+  {
+    variants: {
+      rarity: {
+        1: "border-gray-400 hover:bg-gray-200",
+        2: "border-blue-400 hover:bg-blue-100",
+        3: "border-yellow-400 hover:bg-yellow-100",
+        4: "border-purple-400 hover:bg-purple-100",
+      },
+    },
+    defaultVariants: {
+      rarity: 1,
+    },
+  }
+);
+type RarityStylesProps = VariantProps<typeof rarityCardStyles>;
 
 const CreatureCard = ({ creature }: Props) => {
   return (
     <div
-      className={`flex w-48 flex-col items-center gap-2 rounded-lg border-2 p-3 transition-all duration-200 hover:shadow-lg ${getRarityStyles(
-        creature.rarityId
-      )}`}
+      className={rarityCardStyles({
+        rarity: creature.rarityId as RarityStylesProps["rarity"],
+      })}
     >
       <div className="grid w-full grid-cols-2">
         <div>
