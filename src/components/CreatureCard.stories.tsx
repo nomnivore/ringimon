@@ -1,9 +1,10 @@
 import type { StoryFn } from "@storybook/react";
-import CreatureCard from "./CreatureCard";
+import { CreatureCard, CreatureCardLoading } from "./CreatureCard";
 
 export default {
   title: "Components/CreatureCard",
   component: CreatureCard,
+  subcomponents: { CreatureCardLoading },
 };
 
 const Template: StoryFn<typeof CreatureCard> = (args) => (
@@ -62,3 +63,5 @@ WithLongEmotion.args = {
     type: { name: "Radiant" },
   },
 };
+
+export const Loading = () => <CreatureCardLoading />;

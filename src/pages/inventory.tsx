@@ -1,13 +1,28 @@
-import CreatureCard from "../components/CreatureCard";
-import CreatureImage from "../components/CreatureImage";
+import { CreatureCard, CreatureCardLoading } from "../components/CreatureCard";
 import Layout from "../components/Layout";
-import TypeBadge from "../components/TypeBadge";
 import { api } from "../utils/api";
 
 // TODO: pagination, clickable cards
 
 const Inventory: NextPageWithLayout = () => {
   const creatures = api.creatures.getUserCreatures.useQuery();
+
+  const CreatureList = () =>
+    creatures.isLoading ? (
+      <>
+        {Array.from({ length: 10 }, (_, i) => (
+          <CreatureCardLoading key={i} />
+        ))}
+      </>
+    ) : creatures.isError ? (
+      <div className="text-center">Error: {creatures.error.message}</div>
+    ) : (
+      <>
+        {creatures.data?.map((c) => (
+          <CreatureCard key={c.id} creature={c} />
+        ))}
+      </>
+    );
 
   return (
     <div className="">
@@ -27,23 +42,22 @@ const Inventory: NextPageWithLayout = () => {
         </h2>
         <div className="mx-auto grid max-w-4xl grid-cols-2 font-bold md:grid-cols-4">
           <div className="text-center text-lg text-gray-700">
-            Common: {creatures.data?.filter((c) => c.rarityId == 1).length}
+            Common: {creatures.data?.filter((c) => c.rarityId == 1).length || 0}
           </div>
           <div className="text-center text-lg text-blue-800">
-            Rare: {creatures.data?.filter((c) => c.rarityId == 2).length}
+            Rare: {creatures.data?.filter((c) => c.rarityId == 2).length || 0}
           </div>
           <div className="text-center text-lg text-yellow-800">
-            Legendary: {creatures.data?.filter((c) => c.rarityId == 3).length}
+            Legendary:{" "}
+            {creatures.data?.filter((c) => c.rarityId == 3).length || 0}
           </div>
           <div className="text-center text-lg text-purple-800">
-            Mythic: {creatures.data?.filter((c) => c.rarityId == 4).length}
+            Mythic: {creatures.data?.filter((c) => c.rarityId == 4).length || 0}
           </div>
         </div>
         <div className="my-4"></div>
         <div className="mx-auto flex flex-wrap justify-center gap-2 md:gap-4 lg:gap-6">
-          {creatures.data?.map((c) => (
-            <CreatureCard key={c.id} creature={c} />
-          ))}
+          <CreatureList />
         </div>
       </div>
     </div>

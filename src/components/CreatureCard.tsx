@@ -15,25 +15,28 @@ type Props = {
   };
 };
 
-const rarityCardStyles = cva(
-  "flex w-48 flex-col items-center gap-2 rounded-lg border-2 p-3 transition-all duration-200 hover:shadow-lg",
-  {
-    variants: {
-      rarity: {
-        1: "border-gray-400 hover:bg-gray-200",
-        2: "border-blue-400 hover:bg-blue-100",
-        3: "border-yellow-400 hover:bg-yellow-100",
-        4: "border-purple-400 hover:bg-purple-100",
-      },
+const rarityCardStyles = cva("w-48 rounded-lg p-3", {
+  variants: {
+    loading: {
+      true: "animate-pulse h-[308px] bg-gray-300",
+      false:
+        " bg-slate-50 flex flex-col items-center gap-2 border-2 transition-all duration-200 hover:shadow-lg",
     },
-    defaultVariants: {
-      rarity: 1,
+    rarity: {
+      1: "border-gray-400 hover:bg-gray-200",
+      2: "border-blue-400 hover:bg-blue-100",
+      3: "border-yellow-400 hover:bg-yellow-100",
+      4: "border-purple-400 hover:bg-purple-100",
     },
-  }
-);
+  },
+  defaultVariants: {
+    rarity: 1,
+    loading: false,
+  },
+});
 type RarityStylesProps = VariantProps<typeof rarityCardStyles>;
 
-const CreatureCard = ({ creature }: Props) => {
+export const CreatureCard = ({ creature }: Props) => {
   return (
     <div
       className={rarityCardStyles({
@@ -46,7 +49,7 @@ const CreatureCard = ({ creature }: Props) => {
         </div>
         <div className="text-center">{creature.emotion.name}</div>
       </div>
-      <div className="h-[210px] w-[140px]">
+      <div className="h-[210px] w-[140px] overflow-clip">
         <CreatureImage data={creature} />
       </div>
       <div className="text-center text-lg font-semibold">
@@ -56,4 +59,6 @@ const CreatureCard = ({ creature }: Props) => {
   );
 };
 
-export default CreatureCard;
+export const CreatureCardLoading = () => {
+  return <div className={rarityCardStyles({ rarity: 1, loading: true })}></div>;
+};
