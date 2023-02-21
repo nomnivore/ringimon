@@ -4,6 +4,7 @@ import { api } from "../utils/api";
 import ReactPaginate from "react-paginate";
 import { useState } from "react";
 import clsx from "clsx";
+import { Container } from "../components/Container";
 
 // TODO: clickable cards
 
@@ -55,7 +56,7 @@ const Inventory: NextPageWithLayout = () => {
   // TODO: move container out of layout so that we can control it on individual pages (maybe provide a default value?)
   // - then, we can widen the container on large screens to utilize more screen width for horizontal inventory page
   return (
-    <div className="">
+    <Container>
       <h1 className="py-5 text-4xl font-semibold tracking-tighter">
         Inventory
       </h1>
@@ -112,7 +113,7 @@ const Inventory: NextPageWithLayout = () => {
           />
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
