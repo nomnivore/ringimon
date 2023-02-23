@@ -1,6 +1,4 @@
 import { prisma } from "../db";
-import type { Creature } from "@prisma/client";
-
 import { randBetween } from "../../utils/random";
 
 type NameParts = {
