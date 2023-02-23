@@ -16,13 +16,14 @@ const formatOptions = {
   compressionLevel: 9,
 };
 
-imagePaths.forEach((png: string) => {
+const processImg = async (png: string) => {
+  console.log("Processing", png);
   const image = sharp(path.join(fullFolder, png));
 
   const outFolder = path.join(outDir, png.split(".")[0] || "etc");
   if (!fs.existsSync(outFolder)) fs.mkdirSync(outFolder);
 
-  image
+  await image
     .metadata()
     .then((metadata) => {
       const height = metadata.height || 0;
@@ -58,4 +59,17 @@ imagePaths.forEach((png: string) => {
     .catch((err) => {
       console.log(err);
     });
-});
+};
+
+// can't top-level await in this script for some reason
+(async () => {
+  for (const image of imagePaths) {
+    await processImg(image);
+  }
+})()
+  .then(() => {
+    console.log("Done");
+  })
+  .catch((err) => {
+    console.log("Error: ", err);
+  });

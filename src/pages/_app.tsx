@@ -6,29 +6,22 @@ import { api } from "../utils/api";
 
 import "../styles/globals.css";
 
-
 type AppPropsWithLayout<P> = AppProps<P> & {
   Component: NextPageWithLayout;
-}
+};
 
 type PagePropsWithSession = {
-  session: Session | null
-}
+  session: Session | null;
+};
 
 const MyApp: AppType<PagePropsWithSession> = ({
   Component,
   pageProps: { session, ...pageProps },
-}: AppPropsWithLayout<PagePropsWithSession>
-) => {
-
+}: AppPropsWithLayout<PagePropsWithSession>) => {
   const getLayout = Component.getLayout ?? ((page) => page);
   const layout = getLayout(<Component {...pageProps} />);
 
-  return (
-    <SessionProvider session={session}>
-      {layout}
-    </SessionProvider>
-  );
+  return <SessionProvider session={session}>{layout}</SessionProvider>;
 };
 
 export default api.withTRPC(MyApp);
