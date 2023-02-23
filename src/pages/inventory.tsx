@@ -53,24 +53,22 @@ const Inventory: NextPageWithLayout = () => {
       </>
     );
 
-  // TODO: move container out of layout so that we can control it on individual pages (maybe provide a default value?)
-  // - then, we can widen the container on large screens to utilize more screen width for horizontal inventory page
+  // layout here is very WIP, i just wanted to get the basics down and
+  // ideally not have scrollbars on a full width desktop screen
   return (
-    <Container>
-      <h1 className="py-5 text-4xl font-semibold tracking-tighter">
-        Inventory
-      </h1>
+    <Container classOpts={{ maxWidth: false }}>
+      <h1 className="text-4xl font-semibold tracking-tighter">Inventory</h1>
       <div className="flex flex-col xl:flex-row">
         <div className="mb-6">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tighter">
+            <h2 className="my-3 text-2xl font-semibold tracking-tighter">
               Items / Curriencies
             </h2>
             <p>other things of that nature could go here</p>
           </div>
         </div>
-        <div>
-          <h2 className="my-3 text-2xl font-semibold tracking-tighter">
+        <div className="max-w-6xl">
+          <h2 className="my-3 text-center text-2xl font-semibold tracking-tighter">
             Creatures
           </h2>
           <div className="mx-auto grid max-w-4xl grid-cols-2 font-bold md:grid-cols-4">
