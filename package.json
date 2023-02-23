@@ -8,6 +8,7 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "start": "next start",
     "processimg": "ts-node --transpile-only ./data/processImages.ts",
     "storybook": "storybook dev -p 6006",
