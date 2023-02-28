@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
+import * as readline from "readline";
 
 const fullFolder = path.join(__dirname, "artsFull");
 
@@ -16,8 +17,14 @@ const formatOptions = {
   compressionLevel: 9,
 };
 
+const logPng = (png: string, count = 0, max = 0, lineWidth = 35) => {
+  const progress = `(${count}/${max})`;
+  const paddingWidth = lineWidth - png.length - progress.length;
+  const padding = " ".repeat(paddingWidth);
+  process.stdout.write(`Processing ${png}${padding}${progress}\r`);
+};
+
 const processImg = async (png: string) => {
-  console.log("Processing", png);
   const image = sharp(path.join(fullFolder, png));
 
   const outFolder = path.join(outDir, png.split(".")[0] || "etc");
@@ -61,10 +68,38 @@ const processImg = async (png: string) => {
     });
 };
 
-// can't top-level await in this script for some reason
+// check that images match seed data provided in baseCreatures.csv
+const checkImages = () => {
+  const baseCreatures = fs
+    .readFileSync(path.join(__dirname, "baseCreatures.csv"))
+    .toString()
+    .split("\n")
+    .map((line) => line.split(",")[0]);
+  baseCreatures.shift(); // remove header
+
+  // check if any baseCreatures do not have arts
+  const missingArts = baseCreatures.filter(
+    (creature) =>
+      !imagePaths.includes(`${creature?.toLowerCase() as string}.png`)
+  );
+
+  if (missingArts.length > 0) {
+    console.log("Missing arts for: ", missingArts);
+  }
+
+  return missingArts.length == 0;
+};
+
+checkImages();
+
+// process images
 (async () => {
+  const max = imagePaths.length;
+  let count = 1;
   for (const image of imagePaths) {
+    logPng(image, count, max);
     await processImg(image);
+    count++;
   }
 })()
   .then(() => {
