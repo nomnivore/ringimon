@@ -1,11 +1,10 @@
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
-import * as readline from "readline";
 
 const fullFolder = path.join(__dirname, "artsFull");
 
-const outDir = path.join(__dirname, "..", "public", "cimg");
+const outDir = path.join(__dirname, "splits");
 
 const imagePaths = fs
   .readdirSync(fullFolder)
@@ -54,12 +53,15 @@ const processImg = async (png: string) => {
       });
 
       void top
+        .resize(1000, 500)
         .toFormat("png", formatOptions)
         .toFile(path.join(outFolder, "top.png"));
       void mid
+        .resize(1000, 500)
         .toFormat("png", formatOptions)
         .toFile(path.join(outFolder, "mid.png"));
       void bot
+        .resize(1000, 500)
         .toFormat("png", formatOptions)
         .toFile(path.join(outFolder, "bot.png"));
     })
@@ -103,8 +105,10 @@ checkImages();
   }
 })()
   .then(() => {
+    console.log();
     console.log("Done");
   })
   .catch((err) => {
+    console.log();
     console.log("Error: ", err);
   });

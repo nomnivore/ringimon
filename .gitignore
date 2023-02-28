@@ -44,4 +44,4 @@ yarn-error.log*
 
 # creature images - local folder until i find a better solution
 /data/artsFull/
-/public/cimg/
+/data/splits/
