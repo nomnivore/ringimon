@@ -26,6 +26,11 @@ const config = {
         protocol: "https",
         hostname: "cdn.discordapp.com",
       },
+      // public dev bucket for creature images
+      {
+        protocol: "https",
+        hostname: "pub-5bf4ca6e6b044880a3a36b6ed27dbeac.r2.dev",
+      },
     ],
   },
 };
