@@ -8,13 +8,16 @@ type Props = {
   };
 };
 
+// TODO: extract to global app config
+const baseUrl = "https://pub-5bf4ca6e6b044880a3a36b6ed27dbeac.r2.dev";
+
 const CreatureImage = ({ data }: Props) => {
   return (
     <>
       <div className="flex w-full items-center justify-center">
         {data && (
           <Image
-            src={`/cimg/${data.top.name.toLowerCase()}/top.png`}
+            src={`${baseUrl}/${data.top.name.toLowerCase()}/top.png`}
             alt={data.top.name}
             width={2000}
             height={1000}
@@ -24,7 +27,7 @@ const CreatureImage = ({ data }: Props) => {
       <div className="flex w-full items-center justify-center">
         {data && (
           <Image
-            src={`/cimg/${data.mid.name.toLowerCase()}/mid.png`}
+            src={`${baseUrl}/${data.mid.name.toLowerCase()}/mid.png`}
             alt={data.mid.name}
             width={2000}
             height={1000}
@@ -34,7 +37,7 @@ const CreatureImage = ({ data }: Props) => {
       <div className="flex w-full items-center justify-center">
         {data && (
           <Image
-            src={`/cimg/${data.bot.name.toLowerCase()}/bot.png`}
+            src={`${baseUrl}/${data.bot.name.toLowerCase()}/bot.png`}
             alt={data.bot.name}
             width={2000}
             height={1000}
