@@ -9,8 +9,7 @@ type Props = {
 };
 
 // TODO: extract to global app config
-const baseUrl =
-  "https://pub-5bf4ca6e6b044880a3a36b6ed27dbeac.r2.dev";
+const baseUrl = "https://pub-5bf4ca6e6b044880a3a36b6ed27dbeac.r2.dev";
 
 const CreatureImage = ({ data }: Props) => {
   return (
