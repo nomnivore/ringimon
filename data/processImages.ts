@@ -3,8 +3,13 @@ import path from "path";
 import sharp from "sharp";
 
 const fullFolder = path.join(__dirname, "artsFull");
+if (!fs.existsSync(fullFolder)) {
+  console.error("Missing ./data/artsFull folder");
+  process.exit(1);
+}
 
 const outDir = path.join(__dirname, "splits");
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
 
 const imagePaths = fs
   .readdirSync(fullFolder)
