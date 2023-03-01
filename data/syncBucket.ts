@@ -39,6 +39,11 @@ const s3Client = new S3Client({
   },
 });
 
+// ensure all images are uploaded as content type "image/png"
+const commandInput = {
+  ContentType: "image/png",
+};
+
 // create a sync client
 const syncClient = new S3SyncClient({ client: s3Client });
 
@@ -46,7 +51,7 @@ const { sync } = syncClient;
 const monitor = new TransferMonitor();
 monitor.on("progress", (progress) => console.log(progress));
 
-sync(localDir, bucketUri, { dryRun, del, monitor })
+sync(localDir, bucketUri, { dryRun, del, monitor, commandInput })
   .then((res) => {
     console.log(res);
   })
