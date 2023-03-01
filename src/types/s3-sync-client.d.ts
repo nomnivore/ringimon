@@ -16,7 +16,7 @@ declare module "s3-sync-client" {
     dryRun?: boolean;
     filters?: OptionFilter[];
     sizeOnly?: boolean;
-    monitor?: unknown;
+    monitor?: TransferMonitor;
     maxConcurrentTransfers?: number;
     partSize?: number;
     relocations?: Array<[string, string]>; // [source, target]
